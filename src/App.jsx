@@ -11,6 +11,12 @@ export default function SMPInfoSite() {
       type: "Server-side",
       description: "Foundation mod required for all other Fabric mods to function. Provides essential hooks and APIs for mod development."
     },
+        {
+      name: "PolyChess",
+      category: "Social",
+      type: "Server-side",
+      description: "Stonecutter White or Black concrete to create chess pieces."
+    },
     {
       name: "Almanac",
       category: "Library",
@@ -132,6 +138,12 @@ export default function SMPInfoSite() {
       description: "Performance profiler for Minecraft clients, servers and proxies."
     },
     {
+      name: "Polymer",
+      category: "Library",
+      type: "Server-side",
+      description: "Library for creating better server side content!"
+    },
+    {
       name: "Fast Backups",
       category: "Utility",
       type: "Server-side",
@@ -199,12 +211,6 @@ export default function SMPInfoSite() {
       category: "Cosmetic",
       type: "Function",
       description: "Adds the ability to lock a mob's age using a name tag. 'Age lock'; 'age lock'; 'age_lock' are all acceptable names."
-    },
-    {
-      name: "MineChess",
-      category: "Social",
-      type: "Minigame",
-      description: "Working craftabke Chessboard with logic in Minecraft."
     },
     {
       name: "Armor statues",
