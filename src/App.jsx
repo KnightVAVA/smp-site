@@ -503,7 +503,7 @@ export default function SMPInfoSite() {
 
                   <div className="border-t border-neutral-700 pt-2">
                     <h3 className="text-xl font-semibold mb-3 text-blue-400">Server Information</h3>
-                    <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div className="grid md:grid-cols-3 gap-4 text-sm">
                       <div className="bg-neutral-900/50 rounded-lg p-4">
                         <p className="text-neutral-400 mb-1">Minecraft Version</p>
                         <p className="text-neutral-100 font-semibold">1.21.11</p>
@@ -515,10 +515,6 @@ export default function SMPInfoSite() {
                       <div className="bg-neutral-900/50 rounded-lg p-4">
                         <p className="text-neutral-400 mb-1">Difficulty</p>
                         <p className="text-neutral-100 font-semibold">Normal</p>
-                      </div>
-                      <div className="bg-neutral-900/50 rounded-lg p-4">
-                        <p className="text-neutral-400 mb-1">World Border</p>
-                        <p className="text-neutral-100 font-semibold">10,000 blocks</p>
                       </div>
                     </div>
                   </div>
