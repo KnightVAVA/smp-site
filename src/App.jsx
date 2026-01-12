@@ -10,8 +10,26 @@ import {
   Globe,
   LucideCakeSlice,
 } from "lucide-react";
+import { useState, useMemo } from "react";
+
+function filterAndSort(items, search, sortKey) {
+  return items
+    .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => {
+      if (sortKey === "new") {
+        return (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0);
+      }
+      return a[sortKey].localeCompare(b[sortKey]);
+    });
+}
 
 export default function SMPInfoSite() {
+  const [modSearch, setModSearch] = useState("");
+  const [modSort, setModSort] = useState("name");
+
+  const [datapackSearch, setDatapackSearch] = useState("");
+  const [datapackSort, setDatapackSort] = useState("name");
+
   const mods = [
     {
       name: "Fabric API",
@@ -422,6 +440,16 @@ export default function SMPInfoSite() {
 
   const rules = [];
 
+  const filteredMods = useMemo(
+    () => filterAndSort(mods, modSearch, modSort),
+    [mods, modSearch, modSort]
+  );
+
+  const filteredDatapacks = useMemo(
+    () => filterAndSort(datapacks, datapackSearch, datapackSort),
+    [datapacks, datapackSearch, datapackSort]
+  );
+
   return (
     <div className="min-h-screen w-full bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950 text-neutral-100">
       <div className="fixed inset-0 w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-40"></div>
@@ -483,8 +511,29 @@ export default function SMPInfoSite() {
                 </p>
               </div>
 
+              <div className="flex flex-col md:flex-row gap-3 mb-6">
+                <input
+                  type="text"
+                  placeholder="Search mods..."
+                  value={modSearch}
+                  onChange={(e) => setModSearch(e.target.value)}
+                  className="flex-1 bg-neutral-900/60 border border-neutral-700 rounded-lg px-4 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-emerald-500/50"
+                />
+
+                <select
+                  value={modSort}
+                  onChange={(e) => setModSort(e.target.value)}
+                  className="bg-neutral-900/60 border border-neutral-700 rounded-lg px-4 py-2 text-sm text-neutral-100 focus:outline-none focus:border-emerald-500/50"
+                >
+                  <option value="name">Sort by name</option>
+                  <option value="category">Sort by category</option>
+                  <option value="type">Sort by type</option>
+                  <option value="new">Newest first</option>
+                </select>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {mods.map((mod, idx) => (
+                {filteredMods.map((mod, idx) => (
                   <Card
                     key={idx}
                     className="relative bg-neutral-800/70 backdrop-blur-sm border-neutral-700 hover:border-emerald-500/50 hover:bg-neutral-800/90 transition-all duration-300"
@@ -534,8 +583,29 @@ export default function SMPInfoSite() {
                 </p>
               </div>
 
+              <div className="flex flex-col md:flex-row gap-3 mb-6">
+                <input
+                  type="text"
+                  placeholder="Search datapacks..."
+                  value={datapackSearch}
+                  onChange={(e) => setDatapackSearch(e.target.value)}
+                  className="flex-1 bg-neutral-900/60 border border-neutral-700 rounded-lg px-4 py-2 text-sm text-neutral-100 placeholder-neutral-500 focus:outline-none focus:border-cyan-500/50"
+                />
+
+                <select
+                  value={datapackSort}
+                  onChange={(e) => setDatapackSort(e.target.value)}
+                  className="bg-neutral-900/60 border border-neutral-700 rounded-lg px-4 py-2 text-sm text-neutral-100 focus:outline-none focus:border-cyan-500/50"
+                >
+                  <option value="name">Sort by name</option>
+                  <option value="category">Sort by category</option>
+                  <option value="type">Sort by type</option>
+                  <option value="new">Newest first</option>
+                </select>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {datapacks.map((pack, idx) => (
+                {filteredDatapacks.map((pack, idx) => (
                   <Card
                     key={idx}
                     className="relative bg-neutral-800/70 backdrop-blur-sm border-neutral-700 hover:border-cyan-500/50 hover:bg-neutral-800/90 transition-all duration-300"
