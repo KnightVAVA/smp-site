@@ -794,8 +794,15 @@ export default function SMPInfoSite() {
                         <span className="text-emerald-400">/trigger color</span>
                         <span className="text-neutral-400">
                           {" "}
-                          – Change your username color by selecting a color in
-                          chat.
+                          – Change your username color by selecting a color in chat.
+                        </span>
+                      </p>
+
+                      <p>
+                        <span className="text-emerald-400">/discord</span>
+                        <span className="text-neutral-400">
+                          {" "}
+                          – Display discord invite link in chat.
                         </span>
                       </p>
 
