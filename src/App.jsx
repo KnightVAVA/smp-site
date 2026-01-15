@@ -9,7 +9,6 @@ import {
   Users,
   Shield,
   Zap,
-  Globe,
   LucideCakeSlice,
 } from "lucide-react";
 import { useState, useMemo } from "react";
@@ -32,7 +31,6 @@ export default function SMPInfoSite() {
 
   const [datapackSearch, setDatapackSearch] = useState("");
   const [datapackSort, setDatapackSort] = useState("name");
-  const rules = [];
 
   const filteredMods = useMemo(
     () => filterAndSort(mods, modSearch, modSort),
@@ -44,6 +42,8 @@ export default function SMPInfoSite() {
     [datapacks, datapackSearch, datapackSort]
   );
 
+
+    // Enums for tab type, please use this 
     const tabType = {
         ABOUT : "about",
         MODS : "mods",
@@ -76,30 +76,12 @@ export default function SMPInfoSite() {
         <main className="max-w-7xl mx-auto px-4 sm:px-2 lg:px-4 pb-20">
           <Tabs defaultValue="about" className="w-full">
             <TabsList className="flex flex-col gap-3 h-auto sm:flex-row mb-5 bg-neutral-800/80 backdrop-blur-md border border-neutral-700 p-1.5 rounded-xl shadow-lg">
-            <TabTriggerBar tabType={tabType.MODS} text={tabType.MODS}/>
-                
-
-              <TabsTrigger
-                value={tabType.ABOUT}
-                className="w-full rounded-lg px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-gradient-to-br data-[state=active]:from-blue-500/20 data-[state=active]:to-blue-600/20 data-[state=active]:text-blue-300 data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-blue-500/30 data-[state=inactive]:text-neutral-400 data-[state=inactive]:hover:text-neutral-200 data-[state=inactive]:hover:bg-neutral-700/50"
-              >
-                Getting Started
-              </TabsTrigger>
-              <TabsTrigger
-                value={tabType.MODS}
-                className="w-full rounded-lg px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-gradient-to-br data-[state=active]:from-emerald-500/20 data-[state=active]:to-emerald-600/20 data-[state=active]:text-emerald-300 data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-emerald-500/30 data-[state=inactive]:text-neutral-400 data-[state=inactive]:hover:text-neutral-200 data-[state=inactive]:hover:bg-neutral-700/50"
-              >
-                Server Mods ({mods.length})
-              </TabsTrigger>
-              <TabsTrigger
-                value={tabType.DATAPACKS}
-                className="w-full rounded-lg px-6 py-2 text-sm font-medium transition-all data-[state=active]:bg-gradient-to-br data-[state=active]:from-cyan-500/20 data-[state=active]:to-cyan-600/20 data-[state=active]:text-cyan-300 data-[state=active]:shadow-lg data-[state=active]:border data-[state=active]:border-cyan-500/30 data-[state=inactive]:text-neutral-400 data-[state=inactive]:hover:text-neutral-200 data-[state=inactive]:hover:bg-neutral-700/50"
-              >
-                Datapacks ({datapacks.length})
-              </TabsTrigger>
+                <TabTriggerBar tabType={tabType.ABOUT} text={"Getting Started"}/>
+                <TabTriggerBar tabType={tabType.MODS} text={`Server Mods (${mods.length})`}/>
+                <TabTriggerBar tabType={tabType.DATAPACKS} text={`Datapacks (${datapacks.length})`}/>
             </TabsList>
 
-            <TabsContent value="mods" className="space-y-">
+            <TabsContent value="mods" className="space-y-6">
               <div className="bg-neutral-800/50 backdrop-blur-sm border border-neutral-700 rounded-lg p-3 mb-8">
                 <h2 className="text-2xl font-semibold mb-2 flex items-center gap-2 text-neutral-100">
                   <Shield className="w-6 h-6 text-emerald-400" />
@@ -140,13 +122,6 @@ export default function SMPInfoSite() {
                     className="relative bg-neutral-800/70 backdrop-blur-sm border-neutral-700 hover:border-emerald-500/50 hover:bg-neutral-800/90 transition-all duration-300"
                   >
                     <CardContent className="p-6">
-                      {mod.isNew && (
-                        <div className="absolute top-3 right-3 bg-emerald-500/20 border border-emerald-500/30 rounded px-1.5 py-0.5">
-                          <span className="text-emerald-300 text-xs font-bold">
-                            NEW
-                          </span>
-                        </div>
-                      )}
                       <h3 className="text-xl font-semibold mb-3 text-neutral-100">
                         {mod.name}
                       </h3>
@@ -212,16 +187,6 @@ export default function SMPInfoSite() {
                     className="relative bg-neutral-800/70 backdrop-blur-sm border-neutral-700 hover:border-cyan-500/50 hover:bg-neutral-800/90 transition-all duration-300"
                   >
                     <CardContent className="p-6">
-                      {pack.isNew && (
-                        <div className="absolute top-3 right-3 bg-cyan-500/20 border border-cyan-500/30 rounded px-1.5 py-0.5">
-                          <span
-                            title="New datapack"
-                            className="text-cyan-300 text-xs font-bold"
-                          >
-                            NEW
-                          </span>
-                        </div>
-                      )}
                       <h3 className="text-xl font-semibold mb-3 text-neutral-100">
                         {pack.name}
                       </h3>
